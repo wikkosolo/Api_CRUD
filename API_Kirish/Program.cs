@@ -20,6 +20,7 @@ builder.Services.AddTransient<ICarInterface, CarRepository>();
 builder.Services.AddTransient<ICarService, CarService>();
 builder.Services.AddTransient<IBrendsInterface, BrendsRepository>();
 builder.Services.AddTransient<IBrendService, BrendService>();
+builder.Services.AddTransient<IFileService, FileService>(); 
 
 var app = builder.Build();
 

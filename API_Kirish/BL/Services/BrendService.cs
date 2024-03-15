@@ -4,17 +4,19 @@ using API_Kirish.Data.Interfaces;
 
 namespace API_Kirish.BL.Services;
 
-public class BrendService(IBrendsInterface brendsInterface)
+public class BrendService(IBrendsInterface brendsInterface,
+                          IFileService fileService)
     : IBrendService
 {
     private readonly IBrendsInterface _brendsInterface = brendsInterface;
+    private readonly IFileService _fileService = fileService;
 
     public void Add(AddBrendDto newBrend)
     {
         Brends brend = new()
         {
             Name = newBrend.Name,
-            Image = newBrend.Image
+            Image = _fileService.UploadImage(newBrend.file)
         };
         _brendsInterface.Add(brend);
     }
@@ -22,8 +24,13 @@ public class BrendService(IBrendsInterface brendsInterface)
     public void Delete(int id)
     {
         var brend = _brendsInterface.GetById(id);
-        _brendsInterface.Delete(brend);
+        if (brend != null)
+        {
+            _fileService.DeleteImage(brend.Image);
+            _brendsInterface.Delete(brend);
+        }
     }
+
 
     public List<BrendDto> GetAll()
     {
@@ -37,6 +44,7 @@ public class BrendService(IBrendsInterface brendsInterface)
         return dtos;
     }
 
+
     public BrendDto GetById(int id)
     {
         var brend = _brendsInterface.GetById(id);
@@ -49,14 +57,17 @@ public class BrendService(IBrendsInterface brendsInterface)
         return dto;
     }
 
+
     public void Update(BrendDto brend)
     {
-        Brends brendEntity = new()
+        var brendEntity = _brendsInterface.GetById(brend.Id);
+        if (brend.file != null)
         {
-            Id = brend.Id,
-            Name = brend.Name,
-            Image = brend.Image
-        };
-        _brendsInterface.Update(brendEntity);
+            _fileService.DeleteImage(brendEntity.Image);
+            brendEntity.Image = _fileService.UploadImage(brend.file);
+        }
+        brendEntity.Name = brend.Name;
+        _brendsInterface.Update(brendEntity); 
     }
+
 }

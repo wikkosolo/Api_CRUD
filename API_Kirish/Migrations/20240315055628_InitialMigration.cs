@@ -36,7 +36,8 @@ namespace API_Kirish.Migrations
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BrendsId = table.Column<int>(type: "int", nullable: true)
+                    BrendId = table.Column<int>(type: "int", nullable: false),
+                    BrendsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,7 +46,8 @@ namespace API_Kirish.Migrations
                         name: "FK_Cars_Brends_BrendsId",
                         column: x => x.BrendsId,
                         principalTable: "Brends",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

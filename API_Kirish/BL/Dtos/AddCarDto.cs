@@ -6,5 +6,5 @@ public class AddCarDto
     public int Year { get; set; }
     public string Color { get; set; }
     public decimal Price { get; set; }
-    public string Image { get; set; }
+    public int BrendId { get; set; }
 }

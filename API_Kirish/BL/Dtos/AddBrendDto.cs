@@ -2,6 +2,6 @@
 
 public class AddBrendDto
 {
-    public string Name { get; set; }
-    public string Image { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public IFormFile? file { get; set; }
 }
