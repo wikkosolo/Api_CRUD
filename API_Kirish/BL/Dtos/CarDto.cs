@@ -2,5 +2,5 @@
 
 public class CarDto : AddCarDto
 {
-    public int ID { get; set; }
+    public int Id { get; set; }
 }

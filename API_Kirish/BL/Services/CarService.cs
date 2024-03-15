@@ -1,6 +1,6 @@
 ﻿using API_Kirish.BL.Dtos;
 using API_Kirish.Data.Entities;
-using API_Kirish.Data.Repositories;
+using API_Kirish.Data.Interfaces;
 
 namespace API_Kirish.BL.Services;
 
@@ -33,7 +33,7 @@ public class CarService (ICarInterface carInterface)
         var cars = _carInterface.GetAll();
         var dtos = cars.Select(c => new CarDto
         {
-            ID = c.ID,
+            Id = c.Id,
             Model = c.Model,
             Year = c.Year,
             Color = c.Color,
@@ -48,7 +48,7 @@ public class CarService (ICarInterface carInterface)
         var car = _carInterface.GetById(id);
         var dto = new CarDto
         {
-            ID = car.ID,
+            Id = car.Id,
             Model = car.Model,
             Year = car.Year,
             Color = car.Color,
@@ -60,7 +60,7 @@ public class CarService (ICarInterface carInterface)
 
     public void Update(CarDto dto)
     {
-        var car = _carInterface.GetById(dto.ID);
+        var car = _carInterface.GetById(dto.Id);
         car.Model = dto.Model;
         car.Year = dto.Year;
         car.Color = dto.Color;

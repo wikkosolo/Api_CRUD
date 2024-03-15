@@ -1,8 +1,8 @@
 ﻿namespace API_Kirish.Data.Entities;
 
-public class Car
+public class Car : BaseEntity
 {
-    public int ID { get; set; }
+    public string Name { get; set; }
     public string Model { get; set; }
     public int Year { get; set; }
     public string Color { get; set; }

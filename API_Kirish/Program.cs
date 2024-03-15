@@ -1,5 +1,6 @@
 using API_Kirish.BL.Services;
 using API_Kirish.Data;
+using API_Kirish.Data.Interfaces;
 using API_Kirish.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 

@@ -4,8 +4,7 @@ using GenericRepository;
 
 namespace API_Kirish.Data.Repositories;
 
-public class CarRepository(CarDbContext dbContext) : 
-    Repository<CarDbContext, Car>(dbContext) , 
-    ICarInterface
+public class BrendsRepository(CarDbContext dbContext)
+    : Repository<CarDbContext, Brends>(dbContext), IBrendsInterface
 {
 }
