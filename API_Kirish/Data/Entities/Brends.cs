@@ -2,7 +2,7 @@
 
 public class Brends : BaseEntity
 {
-    public string Name { get; set; }
-    public string Image { get; set; }
+    public string Name { get; set; } = null!;
+    public string Image { get; set; } = null!;
     public List<Car> Cars { get; set; } = new();
 }

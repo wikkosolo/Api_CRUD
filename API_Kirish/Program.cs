@@ -18,6 +18,8 @@ builder.Services.AddDbContext<CarDbContext>(options
 
 builder.Services.AddTransient<ICarInterface, CarRepository>();
 builder.Services.AddTransient<ICarService, CarService>();
+builder.Services.AddTransient<IBrendsInterface, BrendsRepository>();
+builder.Services.AddTransient<IBrendService, BrendService>();
 
 var app = builder.Build();
 
