@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_Kirish.Migrations
 {
     [DbContext(typeof(CarDbContext))]
-    [Migration("20240315064254_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240315085806_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
