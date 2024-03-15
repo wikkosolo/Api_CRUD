@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_Kirish.Migrations
 {
     [DbContext(typeof(CarDbContext))]
-    [Migration("20240315055628_InitialMigration")]
+    [Migration("20240315064254_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -63,15 +63,7 @@ namespace API_Kirish.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Model")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

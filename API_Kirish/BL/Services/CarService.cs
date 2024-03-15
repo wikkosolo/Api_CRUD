@@ -2,73 +2,85 @@
 using API_Kirish.Data.Entities;
 using API_Kirish.Data.Interfaces;
 
-namespace API_Kirish.BL.Services
+namespace API_Kirish.BL.Services;
+
+public class CarService(ICarInterface carInterface, IBrendsInterface brendsInterface)
+    : ICarService
 {
-    public class CarService : ICarService
+    private readonly ICarInterface _carInterface = carInterface;
+    private readonly IBrendsInterface _brendsInterface = brendsInterface;
+
+    public void Add(AddCarDto newCar)
     {
-        private readonly ICarInterface _carInterface;
-
-        public CarService(ICarInterface carInterface)
+        var brend = _brendsInterface.GetById(newCar.BrendId);
+        if (brend == null)
         {
-            _carInterface = carInterface;
+            return;
         }
 
-        public void Add(AddCarDto newCar)
+        Car car = new Car
         {
-            Car car = new()
-            {
-                Model = newCar.Model,
-                Year = newCar.Year,
-                Color = newCar.Color,
-                Price = newCar.Price
-            };
+            Model = newCar.Model,
+            Year = newCar.Year,
+            Color = newCar.Color,
+            Price = newCar.Price,
+            BrendId = newCar.BrendId,
+            Brends = brend
+        };
+        _carInterface.Add(car);
+    }
 
-            _carInterface.Add(car);
-        }
 
+    public void Delete(int id)
+    {
+        var car = _carInterface.GetById(id);
+        _carInterface.Delete(car);
+    }
 
-        public void Delete(int id)
+    public List<CarDto> GetAllCars()
+    {
+        var cars = _carInterface.GetAll();
+        var dtos = cars.Select(c => new CarDto
         {
-            var car = _carInterface.GetById(id);
-            _carInterface.Delete(car);
-        }
+            Id = c.Id,
+            Model = c.Model,
+            Year = c.Year,
+            Color = c.Color,
+            BrendId = c.BrendId,
+            Price = c.Price
+        }).ToList();
+        return dtos;
+    }
 
-        public List<CarDto> GetAllCars()
+    public CarDto GetCarById(int id)
+    {
+        var car = _carInterface.GetById(id);
+        var dto = new CarDto
         {
-            var cars = _carInterface.GetAll();
-            var dtos = cars.Select(c => new CarDto
-            {
-                Id = c.Id,
-                Model = c.Model,
-                Year = c.Year,
-                Color = c.Color,
-                Price = c.Price
-            }).ToList();
-            return dtos;
-        }
+            Id = car.Id,
+            Model = car.Model,
+            Year = car.Year,
+            Color = car.Color,
+            BrendId = car.BrendId,
+            Price = car.Price
+        };
+        return dto;
+    }
 
-        public CarDto GetCarById(int id)
+    public void Update(CarDto dto)
+    {
+        var car = _carInterface.GetById(dto.Id);
+        if (car == null)
         {
-            var car = _carInterface.GetById(id);
-            var dto = new CarDto
-            {
-                Id = car.Id,
-                Model = car.Model,
-                Year = car.Year,
-                Color = car.Color,
-                Price = car.Price
-            };
-            return dto;
+            return;
         }
+        car.Model = dto.Model;
+        car.Year = dto.Year;
+        car.Color = dto.Color;
+        car.Price = dto.Price;
+        car.BrendId = dto.BrendId;
 
-        public void Update(CarDto dto)
-        {
-            var car = _carInterface.GetById(dto.Id);
-            car.Model = dto.Model;
-            car.Year = dto.Year;
-            car.Color = dto.Color;
-            car.Price = dto.Price;
-            _carInterface.Update(car);
-        }
+
+        _carInterface.Update(car);
     }
 }

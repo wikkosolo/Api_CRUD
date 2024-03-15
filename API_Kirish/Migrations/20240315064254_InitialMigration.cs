@@ -30,12 +30,10 @@ namespace API_Kirish.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BrendId = table.Column<int>(type: "int", nullable: false),
                     BrendsId = table.Column<int>(type: "int", nullable: false)
                 },
